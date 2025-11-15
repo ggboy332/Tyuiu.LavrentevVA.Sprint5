@@ -36,7 +36,6 @@ namespace Tyuiu.LavrentevVA.Sprint5.Task1.V3.Lib
             }
             return path;
 
-        }
-            
+        }  
     }
 }
