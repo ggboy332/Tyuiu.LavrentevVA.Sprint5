@@ -13,7 +13,7 @@ namespace Tyuiu.LavrentevVA.Sprint5.Task3.V19.Lib
             {
                 File.Delete(path);
             }
-            double y = 2 * Math.Pow(x, 2) - 1 / Math.Sqrt(Math.Pow(x, 2) - 2);
+            double y = (2 * Math.Pow(x, 2) - 1) / Math.Sqrt(Math.Pow(x, 2) - 2);
             y = Math.Round(y, 3);
             using (BinaryWriter writer = new BinaryWriter(File
                     .Open(path, FileMode.Create)))
