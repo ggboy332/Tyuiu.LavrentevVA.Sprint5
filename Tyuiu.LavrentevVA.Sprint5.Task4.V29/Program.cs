@@ -15,7 +15,7 @@ namespace Tyuiu.LavrentevVA.Sprint5.Task4.V29
 
             string path = @"C:\DataSprint5\InPutDataFileTask4V29.txt";
             double result = ds.LoadFromDataFile(path);
-            Console.WriteLine("Результат: " + result);
+            Console.WriteLine("Резуdльтат: " + result);
             Console.ReadKey();
         }
     }
