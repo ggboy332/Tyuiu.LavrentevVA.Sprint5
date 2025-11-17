@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Globalization;
 using tyuiu.cources.programming.interfaces.Sprint5;
 namespace Tyuiu.LavrentevVA.Sprint5.Task5.V23.Lib
 {
@@ -6,23 +7,21 @@ namespace Tyuiu.LavrentevVA.Sprint5.Task5.V23.Lib
     {
         public double LoadFromDataFile(string path)
         {
-            double res = double.MaxValue;
-            using (StreamReader reader = new StreamReader(path))
+            string content = File.ReadAllText(path);
+            string[] tokens = content.Split(new[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+
+            double min = double.MaxValue;
+            foreach (var token in tokens)
             {
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                // Проверяем, что число вещественное (содержит точку или запятую)
+                if ((token.Contains('.') || token.Contains(',')) &&
+                    double.TryParse(token, NumberStyles.Any, CultureInfo.InvariantCulture, out double number))
                 {
-                    if (double.TryParse(line, out double number))
-                    {
-                        if (number < res)
-                        {
-                            res = number;
-                        }
-                    }
+                    if (number < min)
+                        min = number;
                 }
             }
-            res = Math.Round(res, 3);
-            return res;
+            return Math.Round(min, 3);
         }
     }
 }
