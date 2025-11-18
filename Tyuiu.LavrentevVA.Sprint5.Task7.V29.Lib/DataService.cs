@@ -8,19 +8,41 @@ namespace Tyuiu.LavrentevVA.Sprint5.Task7.V29.Lib
     {
         public string LoadDataAndSave(string path)
         {
-            // Читаем содержимое файла
-            string content = File.ReadAllText(path);
+            string pathSaveFile = Path.Combine(Directory.GetCurrentDirectory(), "OutPutDataFileTask7V29.txt");
 
-            // Удаляем однозначные числа с помощью регулярного выражения
-            string result = Regex.Replace(content, @"\b\d\b", "");
+            FileInfo fileInfo = new FileInfo(pathSaveFile);
+            bool fileExists = fileInfo.Exists;
+            if (fileExists)
+            {
+                File.Delete(pathSaveFile);
+            }
 
-            // Сохраняем файл в текущей рабочей директории
-            string outputPath = "OutPutDataFileTask7V29.txt";
+            string strLine = "";
+            using (StreamReader sr = new StreamReader(path))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string processedLine = "";
+                    for (int i = 0; i < line.Length; i++)
+                    {
+                        if ((line[i] >= '0' && line[i] <= '9') &&
+                            (i + 1 == line.Length || line[i + 1] == ' ' || line[i + 1] == '\t') &&
+                            (i == 0 || line[i - 1] == ' ' || line[i - 1] == '\t'))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            processedLine += line[i];
+                        }
+                    }
+                    strLine += processedLine + Environment.NewLine;
+                }
 
-            // Записываем результат в выходной файл
-            File.WriteAllText(outputPath, result);
-
-            return outputPath;
+                File.AppendAllText(pathSaveFile, strLine);
+            }
+            return pathSaveFile;
         }
     }
 }
