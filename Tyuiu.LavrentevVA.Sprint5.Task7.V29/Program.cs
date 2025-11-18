@@ -13,10 +13,10 @@ namespace Tyuiu.LavrentevVA.Sprint5.Task7.V29
             DataService ds = new DataService();
 
             string path = @"C:\DataSprint5\InPutDataFileTask7V29.txt";
-            string pathsaveFile = $@"C:\DataSprint5\OutPutFileTask7V29.txt";
-            pathsaveFile = ds.LoadDataAndSave(path);
+            string resultPath = ds.LoadDataAndSave(path);
+
+            Console.WriteLine("Результат сохранен в файл: " + resultPath);
             Console.ReadKey();
         }
     }
 }
-
