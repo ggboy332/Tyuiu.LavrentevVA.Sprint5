@@ -12,6 +12,9 @@ namespace Tyuiu.LavrentevVA.Sprint5.Task7.V29.Lib
             string content = File.ReadAllText(path);
             string pattern = @"\b\d\b";
             string result = Regex.Replace(content, pattern, string.Empty);
+            result = Regex.Replace(result, @"\s+", " ");
+            result = result.Trim();
+
             return result;
         }
     }
