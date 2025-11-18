@@ -11,7 +11,7 @@ namespace Tyuiu.LavrentevVA.Sprint5.Task7.V29.Lib
             // Читаем содержимое файла
             string content = File.ReadAllText(path);
 
-            // Удаляем однозначные числа с помощью регулярного выражения
+            // Удаляем однозначные sdчисла с помощью регулярного выражения
             string result = Regex.Replace(content, @"\b\d\b", "");
 
             // Формируем путь для выходного файла в той же папке, что и входной файл
