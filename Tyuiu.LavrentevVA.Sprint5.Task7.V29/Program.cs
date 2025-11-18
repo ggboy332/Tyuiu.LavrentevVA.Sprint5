@@ -8,28 +8,45 @@ namespace Tyuiu.LavrentevVA.Sprint5.Task7.V29
     {
         static void Main(string[] args)
         {
+            Console.Title = "Спринт #5 | Выполнил: Лаврентьев В. А. | ИСПб-25-1";
+            Console.WriteLine("****************************************************************************");
+            Console.WriteLine("* Спринт #5                                                                *");
+            Console.WriteLine("* Тема: Добавление к решению итоговых проектов по спринту                  *");
+            Console.WriteLine("* Задание #7                                                               *");
+            Console.WriteLine("* Вариант #29                                                              *");
+            Console.WriteLine("* Выполнил: Дацкий Денис Евгеньевич. | ИСПб-25-1                           *");
+            Console.WriteLine("****************************************************************************");
+            Console.WriteLine("* УСЛОВИЕ:                                                                 *");
+            Console.WriteLine("* Дан файл C:\\DataSprint5\\InputDataFileTask7V29.txt                      *");
+            Console.WriteLine("* Удалить все однозначные числа из файла и сохранить результат в           *");
+            Console.WriteLine("* OutPutDataFileTask7V1.txt                                                *");
+            Console.WriteLine("****************************************************************************");
+            Console.WriteLine("* ИСХОДНЫЕ ДАННЫЕ:                                                         *");
+            Console.WriteLine("****************************************************************************");
+
+            string sourcePath = @"C:\DataSprint5\InputDataFileTask7V29.txt";
+
+            string tempDirectory = Path.GetTempPath();
+            string tempFileName = Path.GetFileName(sourcePath);
+            string tempFilePath = Path.Combine(tempDirectory, tempFileName);
+
+            File.Copy(sourcePath, tempFilePath, true);
+
+            Console.WriteLine($"Файл скопирован в: {tempFilePath}");
+
+            Console.WriteLine("***************************************************************************");
+            Console.WriteLine("* РЕЗУЛЬТАТ:                                                              *");
+            Console.WriteLine("***************************************************************************");
+
             DataService ds = new DataService();
+            string result = ds.LoadDataAndSave(tempFilePath);
 
-            string path = @"C:\DataSprint5\InPutDataFileTask7V29.txt";
+            string outputPath = Path.Combine(tempDirectory, "OutPutDataFileTask7V29.txt");
+            File.WriteAllText(outputPath, result);
 
-            // Создаем папку и файл если их нет
-            Directory.CreateDirectory(@"C:\DataSprint5");
-
-            // Создаем тестовое содержимое как в задании
-            string testContent = "сегодня 12 завтра 4 послезавтра 34 и потом 4 5 6";
-            File.WriteAllText(path, testContent);
-
-            Console.WriteLine("Файл создан: " + path);
-            Console.WriteLine("Содержимое: " + testContent);
-
-            string resultPath = ds.LoadDataAndSave(path);
-
-            Console.WriteLine("Результат сохранен в файл: " + resultPath);
-
-            // Читаем и выводим результат
-            string resultContent = File.ReadAllText(resultPath);
-            Console.WriteLine("Результат: " + resultContent);
-
+            Console.WriteLine($"Результат сохранён в: {outputPath}");
+            Console.WriteLine("Содержимое результата:");
+            Console.WriteLine(result);
             Console.ReadKey();
         }
     }
